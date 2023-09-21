@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App de Torneio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>Torneio "Todos contra Todos"</h1>
+
+    <div>
+        <h2>Quantos Participantes?</h2>
+        <input type="number" id="quantidadeParticipantes" placeholder="Insira a quantidade aqui">
+        <button onclick="iniciarRegistro()">Iniciar Registro</button>
+    </div>
+
+    <div id="registroParticipantes" style="display: none;">
+        <h2>Registro de Participantes</h2>
+        <input type="text" id="nomeParticipante" placeholder="Insira o nome aqui">
+        <button onclick="adicionarParticipante()">Adicionar</button>
+    </div>
+
+    <div>
+        <h2>Participantes</h2>
+        <ul id="listaParticipantes">
+            <!-- A lista de participantes será exibida aqui -->
+        </ul>
+    </div>
+
+    <div>
+        <h2>Resultados dos Jogos</h2>
+        <!-- Aqui você pode adicionar campos para registrar resultados de jogos -->
+    </div>
+
+    <div>
+        <h2>Classificação</h2>
+        <ul id="classificacao">
+            <!-- A classificação será exibida aqui -->
+        </ul>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
