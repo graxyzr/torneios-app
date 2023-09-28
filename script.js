@@ -2,18 +2,26 @@ let participantes = [];
 let limiteParticipantes = 0;
 
 function iniciarRegistro() {
+    var codigoHTML = `
+  <div id="registroParticipantes" style="display: none;">
+    <h2>Registro de Participantes</h2>
+    <input type="text" id="nomeParticipante" placeholder="Insira o nome aqui">
+    <button onclick="adicionarParticipante()">Adicionar</button>
+  </div>
+`;
 
-    const quantidade = parseInt(document.getElementById('quantidadeParticipantes').value);
+    document.querySelector("#numeroParticipantes").innerHTML = codigoHTML;
+    //const quantidade = parseInt(document.getElementById('quantidadeParticipantes').value);
 
-    if (!isNaN(quantidade) && quantidade > 0) {
+    //if (!isNaN(quantidade) && quantidade > 0) {
 
-        limiteParticipantes = quantidade;
-        document.getElementById('quantidadeParticipantes').disabled = true;
-        document.getElementById('registroParticipantes').style.display = 'block';
-
-    }
+    //    limiteParticipantes = quantidade;
+    //document.getElementById('quantidadeParticipantes').disabled = true;
+    //document.getElementById('registroParticipantes').style.display = 'block';
 
 }
+
+
 
 
 function carregarParticipantes() {
@@ -50,6 +58,12 @@ function adicionarParticipante() {
 
         }
 
+        // Seleciona a div com o id "numeroParticipantes"
+        var divNumeroParticipantes = document.getElementById("numeroParticipantes");
+
+        // Define o estilo CSS para ocultar a div
+        divNumeroParticipantes.style.display = "none";
+
     }
 
 }
@@ -71,4 +85,14 @@ function atualizarListaParticipantes() {
 
 }
 
+function limparFormulario() {
+
+    document.getElementById("buttonInicio").reset();
+    localStorage.clear();
+
+}
+
+document.getElementById("buttonInicio").addEventListener("click", limparFormulario);
 carregarParticipantes();
+
+mostrarOcultarDiv(id);
