@@ -4,43 +4,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>App de Torneio</title>
+    <title>Libertadores da América</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="img/libertadores-logo.png">
 </head>
 
 <body>
-    <h1>Torneio "Todos contra Todos"</h1>
 
-    <div>
-        <h2>Quantos Participantes?</h2>
-        <input type="number" id="quantidadeParticipantes" placeholder="Insira a quantidade aqui">
-        <button onclick="iniciarRegistro()">Iniciar Registro</button>
-    </div>
+    <main>
+        <div id="numeroParticipantes">
+            <h2>Quantos Participantes?</h2>
+            <input type="number" id="quantidadeParticipantes" placeholder="Insira a quantidade aqui">
+            <button onclick="iniciarRegistro()" id="sumir">Iniciar Registro</button>
+        </div>
 
-    <div id="registroParticipantes" style="display: none;">
-        <h2>Registro de Participantes</h2>
-        <input type="text" id="nomeParticipante" placeholder="Insira o nome aqui">
-        <button onclick="adicionarParticipante()">Adicionar</button>
-    </div>
+        <div id="registroParticipantes" style="display: none;">
+            <h2>Registro de Participantes</h2>
+            <input type="text" id="nomeParticipante" placeholder="Insira o nome aqui">
+            <button onclick="adicionarParticipante()">Adicionar</button>
+        </div>
+        <button id="buttonInicio" onclick="">Iniciar</button>
 
-    <div>
-        <h2>Participantes</h2>
-        <ul id="listaParticipantes">
-            <!-- A lista de participantes será exibida aqui -->
-        </ul>
-    </div>
 
-    <div>
-        <h2>Resultados dos Jogos</h2>
-        <!-- Aqui você pode adicionar campos para registrar resultados de jogos -->
-    </div>
 
-    <div>
-        <h2>Classificação</h2>
-        <ul id="classificacao">
-            <!-- A classificação será exibida aqui -->
-        </ul>
-    </div>
+        <div id="resultadosJogos">
+            <h2>Resultados dos Jogos</h2>
+            <!-- Aqui você pode adicionar campos para registrar resultados de jogos -->
+        </div>
+
+        <div id="classificacaoTorneio">
+            <h2>Classificação</h2>
+            <ul id="classificacao">
+                <!-- A classificação será exibida aqui -->
+            </ul>
+        </div>
+    </main>
 
     <script src="script.js"></script>
 </body>
