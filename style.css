@@ -2,11 +2,10 @@
 
 * {
     font-family: 'Kanit', sans-serif;
-    color: #fff
 }
 
 body {
-    background-image: url(img/fundo.png);
+    background-image: url(img/background-libertadores.png);
     background-size: 100%;
 }
 
@@ -15,6 +14,10 @@ main {
     align-items: center;
     flex-direction: column;
     display: flex;
+}
+
+.hidden {
+    display: none;
 }
 
 @media (min-width: 1024px) {}
