@@ -12,32 +12,23 @@
 <body>
 
     <main>
-        <div id="numeroParticipantes">
-            <h2>Quantos Participantes?</h2>
-            <input type="number" id="quantidadeParticipantes" placeholder="Insira a quantidade aqui">
-            <button onclick="iniciarRegistro()" id="sumir">Iniciar Registro</button>
+        <form id="torneioForm">
+            <input type="number" id="quantidade" min="1" placeholder="Insira o número de times" required>
+            <button type="button" id="confirmarQuantidade">Confirmar</button>
+        </form>
+
+        <div id="nomesJogadores" class="hidden">
+            <h3>Insira os nomes dos jogadores/times:</h3>
         </div>
 
-        <div id="registroParticipantes" style="display: none;">
-            <h2>Registro de Participantes</h2>
-            <input type="text" id="nomeParticipante" placeholder="Insira o nome aqui">
-            <button onclick="adicionarParticipante()">Adicionar</button>
-        </div>
-        <button id="buttonInicio" onclick="">Iniciar</button>
-
-
-
-        <div id="resultadosJogos">
-            <h2>Resultados dos Jogos</h2>
-            <!-- Aqui você pode adicionar campos para registrar resultados de jogos -->
+        <div id="partidas" class="hidden">
+            <h3>Partidas:</h3>
+            <table id="partidasTable"></table>
         </div>
 
-        <div id="classificacaoTorneio">
-            <h2>Classificação</h2>
-            <ul id="classificacao">
-                <!-- A classificação será exibida aqui -->
-            </ul>
-        </div>
+        <button id="calcularPontuacaoBtn" class="hidden">Calcular Pontuação</button>
+        <div id="resultadoDiv"></div>
+
     </main>
 
     <script src="script.js"></script>
