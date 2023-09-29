@@ -5,7 +5,7 @@ document.getElementById("confirmarQuantidade").addEventListener("click", functio
 
     if (!isNaN(quantidade) && quantidade >= 1) {
         nomesJogadoresDiv.innerHTML = "";
-
+    
         const camposNomesDiv = document.createElement("div");
 
         // cria campos de input de times com base na quantidade inserida
@@ -27,7 +27,9 @@ document.getElementById("confirmarQuantidade").addEventListener("click", functio
         confirmarNomesBtn.type = "button";
         confirmarNomesBtn.id = "confirmarNomes";
         camposNomesDiv.appendChild(document.createElement("br"));
+         confirmarNomesBtn.classList.add("confirmarQuantidade"); // Adiciona a classe de estilo ao botão
         confirmarNomesBtn.textContent = "Iniciar";
+       
         nomesJogadoresDiv.appendChild(confirmarNomesBtn);
 
         nomesJogadoresDiv.classList.remove("hidden");
