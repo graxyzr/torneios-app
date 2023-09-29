@@ -1,4 +1,4 @@
-/* Reset de estilos para remover margens e preenchimentos padrão */
+/* reset de estilos para remover margens e preenchimentos padrão */
 html,
 body,
 div,
@@ -15,7 +15,7 @@ input {
     border: 0;
 }
 
-/* Define uma fonte padrão para o site */
+/* define uma fonte padrão para o site */
 body {
     font-family: 'Kanit', sans-serif;
     background-image: url(img/background-libertadores.png);
@@ -26,7 +26,7 @@ body {
     align-items: center
 }
 
-/* Estilos para o cabeçalho */
+/* estilos para o cabeçalho */
 header {
     background-color: #DDA21B;
     color: #fff;
@@ -34,7 +34,7 @@ header {
     text-align: center;
 }
 
-/* Estilos para os botões */
+/* estilos para os botões */
 button {
     background-color: #DDA21B;
     color: #fff;
@@ -51,7 +51,7 @@ button:hover {
     background-color: #FFC300;
 }
 
-/* Estilos para os campos de entrada de texto */
+/* estilos para os campos de entrada de texto */
 input[type="number"],
 input[type="text"] {
     border: 1px solid #ccc;
@@ -60,18 +60,18 @@ input[type="text"] {
     font-size: medium;
 }
 
-/* Estilos para os cabeçalhos de seção */
+/* estilos para os cabeçalhos de seção */
 h2 {
     font-size: 24px;
     margin: 20px 0;
 }
 
-/* Estilos para os elementos escondidos */
+/* estilos para os elementos escondidos */
 .hidden {
     display: none;
 }
 
-/* Estilos para tabelas */
+/* estilos para tabelas */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -90,7 +90,7 @@ td {
     text-align: center;
 }
 
-/* Estilos para o botão "Calcular Pontuação" */
+/* estilos para o botão "Calcular Pontuação" */
 #calcularPontuacaoBtn {
     background-color: #DDA21B;
     color: #fff;
@@ -107,17 +107,17 @@ td {
     background-color: #FFC300;
 }
 
-/* Estilos para o time vencedor */
+/* estilos para o time vencedor */
 .vencedor {
     background-color: #28a745;
-    /* Cor de fundo para o time vencedor */
+    /* cor de fundo para o time vencedor */
     color: #fff;
 }
 
-/* Estilos para o resultado do time vencedor */
+/* estilos para o resultado do time vencedor */
 .vencedor-text {
     color: #28a745;
-    /* Cor de texto para o resultado do time vencedor */
+    /* cor de texto para o resultado do time vencedor */
 }
 
 .container {
@@ -125,6 +125,7 @@ td {
     display: flex;
     justify-content: center;
 }
-#torneioForm{
+
+#torneioForm {
     color: white;
 }
