@@ -34,6 +34,8 @@ document.getElementById("confirmarQuantidade").addEventListener("click", functio
 
         nomesJogadoresDiv.classList.remove("hidden");
         document.getElementById("torneioForm").classList.add("hidden");
+        document.getElementById("torneioForm").style.display = "none";
+
 
         // addEventListener para o botão "Iniciar" que começa a gerar as partidas
         confirmarNomesBtn.addEventListener("click", function () {
@@ -190,4 +192,30 @@ document.getElementById("calcularPontuacaoBtn").addEventListener("click", functi
     vencedorTexto.textContent = `Time Vencedor: ${vencedor}`;
     vencedorTexto.classList.add("vencedor-text");
     resultadoDiv.appendChild(vencedorTexto);
+});
+// Event listener para o botão "Carregar"
+document.getElementById("carregar").addEventListener("click", function () {
+    // Recupere os dados do Local Storage
+    const nomesJogadores = JSON.parse(localStorage.getItem("nomesJogadores"));
+
+    if (nomesJogadores) {
+        const dadosJogadoresTable = document.getElementById("dadosJogadoresTable");
+        dadosJogadoresTable.innerHTML = ""; // Limpe o conteúdo da tabela
+
+        // Crie uma linha de cabeçalho para a tabela
+        const cabecalhoRow = dadosJogadoresTable.insertRow();
+        cabecalhoRow.innerHTML = "<th>Time</th><th>Nome do Jogador/Time</th>";
+
+        // Preencha a tabela com os dados recuperados
+        nomesJogadores.forEach((nome, index) => {
+            const row = dadosJogadoresTable.insertRow();
+            row.innerHTML = `<td>Time ${index + 1}</td><td><input type="text" value="${nome}" readonly></td>`;
+        });
+
+        // Exiba a tabela
+        document.getElementById("nomesJogadores").classList.remove("hidden");
+    } else {
+        // Se os dados não foram encontrados no Local Storage, exiba uma mensagem de erro ou trate de outra forma apropriada
+        alert("Os dados não foram encontrados no Local Storage.");
+    }
 });
