@@ -1,12 +1,15 @@
 /* reset de estilos para remover margens e preenchimentos padrão */
 @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;500&family=Open+Sans&display=swap');
 
-html, body{
-    height: 100%;;
+html,
+body {
+    height: 100%;
+    ;
 }
+
 body {
     font-family: 'Kanit', sans-serif;
-    background-image: url(img/background-libertadores.png);
+    background-image: url(img/fundo.png);
     background-size: 100%;
     color: #ffffff;
     display: flex;
@@ -14,13 +17,29 @@ body {
     align-items: center
 }
 
-/* estilos para o cabeçalho */
+/* Estilo para o cabeçalho */
 header {
-    background-color: #DDA21B;
-    color: #fff;
-    padding: 10px 0;
+    display: flex;
+    grid-area: header;
+    flex-direction: row;
+    flex-wrap: nowrap;
     text-align: center;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+  }
+/* Estilo para o logotipo */
+#libertadores-logo {
+    height: 250px; /* Altura da imagem */
+    width: 250px; /* Largura da imagem */
+    margin: 20px auto 0; /* Margem superior para afastar do topo e margens automáticas lateralmente */
+    display: block; /* Centralizar a imagem horizontalmente */
 }
+
+
+
+/* estilos para o cabeçalho */
+
 
 /* estilos para os botões */
 button {
@@ -45,7 +64,7 @@ input[type="text"] {
     border: 1px solid #030303;
     padding: 8px;
     border-radius: 5px;
-    font-size:large;
+    font-size: large;
     margin-bottom: 15px;
     width: 500px;
     height: 15px;
@@ -107,26 +126,36 @@ td {
     align-items: center;
 }
 
-main{
+main {
     display: flex;
     align-items: center;
 }
-#organiza{
+
+#organiza {
     display: inline-block;
 }
+
 #container {
     margin: 0 auto;
     padding: 20px;
-    background-color: rgba(218, 165, 32, 0.7); /* Cor de fundo com 70% de opacidade */
-    border: 2px solid rgba(0, 0, 0, 0.1); /* Borda com transparência */
-    box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.3); /* Sombra com transparência */
-    border-radius: 10px; /* Cantos arredondados */
+    background-color: rgba(218, 165, 32, 0.7);
+    /* Cor de fundo com 70% de opacidade */
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    /* Borda com transparência */
+    box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.3);
+    /* Sombra com transparência */
+    border-radius: 10px;
+    /* Cantos arredondados */
     margin-top: 10%;
 }
+
 #tabelas-container {
-    max-width: 600px; /* Define a largura máxima do grupo de tabelas */
-    margin: 0 auto; /* Centraliza o grupo de tabelas na tela */
-    text-align: center; /* Centraliza o conteúdo dentro do grupo de tabelas */
+    max-width: 600px;
+    /* Define a largura máxima do grupo de tabelas */
+    margin: 0 auto;
+    /* Centraliza o grupo de tabelas na tela */
+    text-align: center;
+    /* Centraliza o conteúdo dentro do grupo de tabelas */
 
     /* Adiciona espaço entre as tabelas */
     margin-bottom: 20px;
@@ -141,8 +170,8 @@ main{
     cursor: pointer;
     transition: background-color 0.3s ease;
     font-size: large;
-    margin-top: 20px; /* Adicione espaço entre as tabelas e o botão */
-}
+    margin: 20px auto; /* Centralizar o botão horizontalmente e adicionar margem superior e inferior */
+    }
 
 #calcularPontuacaoBtn:hover {
     background-color: #868686;
@@ -155,15 +184,19 @@ table {
     margin-bottom: 20px;
 }
 
-table, th, td {
+table,
+th,
+td {
     border: 1px solid #ccc;
 }
 
-th, td {
+th,
+td {
     padding: 10px;
     text-align: center;
 }
-#calc{
+
+#calc {
     display: flex;
     align-items: center;
     margin-bottom: 50px;
@@ -173,4 +206,18 @@ th, td {
     body {
         font-size: 14px;
     }
+}
+#logo-container {
+    position: fixed; 
+    top: 0;
+    left: 0;
+    right: 0;
+    text-align: center; 
+    z-index: 999; 
+}
+footer{
+    position: fixed;
+    display: flex;
+    text-align: center;
+    
 }
