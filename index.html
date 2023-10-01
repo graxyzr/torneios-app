@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,29 +10,41 @@
 </head>
 
 <body>
-<div id="container">
-    <main class="contain">
-        <form id="torneioForm">
-            <input type="number" id="quantidade" min="1"  max="4" placeholder="Insira o número de times" required>
-           <div id="organiza">
-            <button type="button" id="confirmarQuantidade">Confirmar</button>
-            <button type="button" id="carregar">Carregar</button>
-            </div>
-        </form>
-        <div id="nomesJogadores" class="hidden">
-            <h3>Insira os nomes dos jogadores/times:</h3>
-        </div>
+    <audio autoplay loop>
+        <source src="/audio/SnapInsta.io - Hino da Conmebol Libertadores (atualizado) - Himno de la Conmebol Libertadores (128 kbps).mp3" type="audio/mp3" />
+      </audio>
 
-        <div id="partidas" class="hidden">
-            <h3>Partidas:</h3>
-            <table id="partidasTable"></table>
-        </div>
-<div id="calc">
-        <button id="calcularPontuacaoBtn" class="hidden">Calcular Pontuação</button>
-        <div id="resultadoDiv"></div>
+      <div id="logo-container">
+        <img id="libertadores-logo" src="/img/Design sem nome (6).png" alt="Logo">
     </div>
-    </main>
-</div>
+
+    <div id="container">
+        <main class="contain">
+            <form id="torneioForm">
+                <input type="number" id="quantidade" min="1" max="4" placeholder="Insira o número de times" required>
+                <div id="organiza">
+                    <button type="button" id="confirmarQuantidade">Confirmar</button>
+                    <button type="button" id="carregar">Carregar</button>
+                </div>
+            </form>
+            <div id="nomesJogadores" class="hidden">
+                <h3>Insira os nomes dos jogadores/times:</h3>
+            </div>
+
+            <div id="partidas" class="hidden">
+                <h3>Partidas:</h3>
+                <table id="partidasTable"></table>
+            </div>
+            <div id="calc">
+                <button id="calcularPontuacaoBtn" class="hidden">Calcular Pontuação</button>
+                <div id="resultadoDiv"></div>
+            </div>
+        </main>
+
+    </div>
+    <footer>
+        <p>&copy; 2023 Libertadores. Todos os direitos reservados.</p>
+    </footer>
     <script src="script.js"></script>
 </body>
 
