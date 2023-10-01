@@ -8,7 +8,7 @@ document.getElementById("confirmarQuantidade").addEventListener("click", functio
 
         const camposNomesDiv = document.createElement("div");
 
-        // cria campos de input de times com base na quantidade inserida
+        // Cria campos de input de times com base na quantidade inserida
         for (let i = 0; i < quantidade; i++) {
             const input = document.createElement("input");
             input.type = "text";
@@ -16,7 +16,7 @@ document.getElementById("confirmarQuantidade").addEventListener("click", functio
             input.required = true;
             camposNomesDiv.appendChild(input);
 
-            // duas quebras de linha para separar os campos
+            // Duas quebras de linha para separar os campos
             camposNomesDiv.appendChild(document.createElement("br"));
             camposNomesDiv.appendChild(document.createElement("br"));
         }
@@ -44,10 +44,10 @@ document.getElementById("confirmarQuantidade").addEventListener("click", functio
 
             localStorage.setItem("nomesJogadores", JSON.stringify(nomes));
 
-            // gerar partidas baseado nos times
+            // Gerar partidas baseado nos times
             const partidas = generateMatches(nomes);
 
-            // exibir as partidas numa tabela
+            // Exibir as partidas numa tabela
             const partidasTable = document.getElementById("partidasTable");
             partidasTable.innerHTML = ""; // limpar a tabela
 
@@ -56,14 +56,14 @@ document.getElementById("confirmarQuantidade").addEventListener("click", functio
                 const cell1 = row.insertCell(0);
                 const cell2 = row.insertCell(1);
 
-                // insere "x" entre os nomes dos times na tabela
+                // Insere "x" entre os nomes dos times na tabela
                 cell1.innerHTML = `${partida.homeTeam} x ${partida.awayTeam}`;
 
-                // adiciona um campo de seleção (dropdown) para o resultado da partida
+                // Adiciona um campo de seleção (dropdown) para o resultado da partida
                 const resultadoSelect = document.createElement("select");
                 resultadoSelect.id = `resultado-${partida.homeTeam}-${partida.awayTeam}`;
 
-                // opções de resultado (empate, vitória do time 1, vitória do time 2)
+                // Opções de resultado (empate, vitória do time 1, vitória do time 2)
                 const empateOption = document.createElement("option");
                 empateOption.value = "Empate";
                 empateOption.textContent = "Empate";
@@ -88,17 +88,17 @@ document.getElementById("confirmarQuantidade").addEventListener("click", functio
             camposNomesDiv.classList.add("hidden");
             confirmarNomesBtn.classList.add("hidden");
 
-            // salvar os dados dos jogos no localStorage
+            // Salvar os dados dos jogos no localStorage
             localStorage.setItem("dadosJogos", JSON.stringify(partidas));
 
-            // mostrar o botão "Calcular Pontuação"
+            // Mostrar o botão "Calcular Pontuação"
             const calcularPontuacaoBtn = document.getElementById("calcularPontuacaoBtn");
             calcularPontuacaoBtn.classList.remove("hidden");
         });
     }
 });
 
-// gera combinações possíveis de times
+// Gera combinações possíveis de times
 function generateCombinations(teams) {
     const combinations = [];
     for (let i = 0; i < teams.length; i++) {
@@ -109,9 +109,18 @@ function generateCombinations(teams) {
     return combinations;
 }
 
-// gera partidas baseado nas combinações de times
+// Gera partidas baseado nas combinações de times
 function generateMatches(teams) {
-    const combinations = generateCombinations(teams);
+    let nomes = teams;
+
+    // Verificar se os nomes já estão no localStorage
+    const storedNomes = JSON.parse(localStorage.getItem("nomesJogadores"));
+    if (storedNomes && Array.isArray(storedNomes) && storedNomes.length > 0) {
+        nomes = storedNomes;
+    }
+
+
+    const combinations = generateCombinations(nomes);
     const matches = combinations.map(combination => {
         return {
             homeTeam: combination[0],
@@ -121,26 +130,26 @@ function generateMatches(teams) {
     return matches;
 }
 
-// adicionar um evento de clique ao botão "Calcular Pontuação"
+// Adicionar um evento de clique ao botão "Calcular Pontuação"
 document.getElementById("calcularPontuacaoBtn").addEventListener("click", function () {
     const partidasTable = document.getElementById("partidasTable");
     const resultadoDiv = document.getElementById("resultadoDiv");
 
-    // inicializar um objeto para rastrear a pontuação de cada time
+    // Inicializar um objeto para rastrear a pontuação de cada time
     const pontuacao = {};
 
-    // loop através das linhas da tabela de partidas
+    // Loop através das linhas da tabela de partidas
     for (let i = 0; i < partidasTable.rows.length; i++) {
         const row = partidasTable.rows[i];
         const resultadoSelect = row.cells[1].getElementsByTagName("select")[0];
         const resultado = resultadoSelect.value;
 
-        // extrair os nomes dos times da célula da tabela
+        // Extrair os nomes dos times da célula da tabela
         const times = row.cells[0].innerText.split(" x ");
         const time1 = times[0];
         const time2 = times[1];
 
-        // determinar o resultado e atualizar a pontuação
+        // Determinar o resultado e atualizar a pontuação
         if (resultado === "Empate") {
             pontuacao[time1] = (pontuacao[time1] || 0) + 1;
             pontuacao[time2] = (pontuacao[time2] || 0) + 1;
@@ -151,14 +160,14 @@ document.getElementById("calcularPontuacaoBtn").addEventListener("click", functi
         }
     }
 
-    // encontrar o time vencedor e ordenar a pontuação
+    // Encontrar o time vencedor e ordenar a pontuação
     const timesOrdenados = Object.keys(pontuacao).sort((a, b) => pontuacao[b] - pontuacao[a]);
     const vencedor = timesOrdenados[0];
 
-    // limpar o conteúdo anterior do resultadoDiv
+    // Limpar o conteúdo anterior do resultadoDiv
     resultadoDiv.innerHTML = "";
 
-    // exibir a pontuação e destacar o vencedor
+    // Exibir a pontuação e destacar o vencedor
     const tabelaPontuacao = document.createElement("table");
     tabelaPontuacao.classList.add("pontuacao-table");
 
@@ -187,14 +196,28 @@ document.getElementById("calcularPontuacaoBtn").addEventListener("click", functi
 
     resultadoDiv.appendChild(tabelaPontuacao);
 
-    // exibir o time vencedor
+    // Exibir o time vencedor
     const vencedorTexto = document.createElement("p");
     vencedorTexto.textContent = `Time Vencedor: ${vencedor}`;
     vencedorTexto.classList.add("vencedor-text");
     resultadoDiv.appendChild(vencedorTexto);
 });
+
 // Event listener para o botão "Carregar"
 document.getElementById("carregar").addEventListener("click", function () {
+
+    const camposNomeInputs = document.querySelectorAll("input[type='text']");
+    const storedNomes = JSON.parse(localStorage.getItem("nomesJogadores"));
+
+    if (storedNomes && Array.isArray(storedNomes) && storedNomes.length > 0) {
+        storedNomes.forEach((nomes, index) => {
+            if (index < camposNomeInputs.length) {
+                camposNomeInputs[index].value = nome;
+            }
+        });
+    }
+
+
     // Recupere os dados do Local Storage
     const nomesJogadores = JSON.parse(localStorage.getItem("nomesJogadores"));
 
@@ -212,6 +235,13 @@ document.getElementById("carregar").addEventListener("click", function () {
             row.innerHTML = `<td>Time ${index + 1}</td><td><input type="text" value="${nome}" readonly></td>`;
         });
 
+        // Preencha os campos de input com os nomes armazenados no localStorage
+        camposNomeInputs.forEach((input, index) => {
+            if (index < storedNomes.length) {
+                input.value = storedNomes[index];
+            }
+        });
+
         // Exiba a tabela
         document.getElementById("nomesJogadores").classList.remove("hidden");
     } else {
@@ -219,3 +249,4 @@ document.getElementById("carregar").addEventListener("click", function () {
         alert("Os dados não foram encontrados no Local Storage.");
     }
 });
+
