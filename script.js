@@ -1,4 +1,37 @@
-// addEventListener para o botão "Confirmar" que inicia o cadastro dos times
+let confirmarNomesBtn;
+
+// Função para gerar combinações possíveis de times
+function generateCombinations(teams) {
+    const combinations = [];
+    for (let i = 0; i < teams.length; i++) {
+        for (let j = i + 1; j < teams.length; j++) {
+            combinations.push([teams[i], teams[j]]);
+        }
+    }
+    return combinations;
+}
+
+// Função para gerar partidas baseadas nas combinações de times
+function generateMatches(teams) {
+    let nomes = teams;
+
+    // Verificar se os nomes já estão no localStorage
+    const storedNomes = JSON.parse(localStorage.getItem("nomesJogadores"));
+    if (storedNomes && Array.isArray(storedNomes) && storedNomes.length > 0) {
+        nomes = storedNomes;
+    }
+
+    const combinations = generateCombinations(nomes);
+    const matches = combinations.map(combination => {
+        return {
+            homeTeam: combination[0],
+            awayTeam: combination[1]
+        };
+    });
+    return matches;
+}
+
+// Event listener para o botão "Confirmar" que inicia o cadastro dos times
 document.getElementById("confirmarQuantidade").addEventListener("click", function () {
     const quantidade = parseInt(document.getElementById("quantidade").value);
     const nomesJogadoresDiv = document.getElementById("nomesJogadores");
@@ -23,9 +56,11 @@ document.getElementById("confirmarQuantidade").addEventListener("click", functio
 
         nomesJogadoresDiv.appendChild(camposNomesDiv);
 
-        const confirmarNomesBtn = document.createElement("button");
+        confirmarNomesBtn = document.createElement("button");
         confirmarNomesBtn.type = "button";
         confirmarNomesBtn.id = "confirmarNomes";
+        confirmarNomesBtn.style.display = "block";
+        confirmarNomesBtn.style.margin = "0 auto";
         camposNomesDiv.appendChild(document.createElement("br"));
         confirmarNomesBtn.classList.add("confirmarQuantidade"); // Adiciona a classe de estilo ao botão
         confirmarNomesBtn.textContent = "Iniciar";
@@ -36,11 +71,11 @@ document.getElementById("confirmarQuantidade").addEventListener("click", functio
         document.getElementById("torneioForm").classList.add("hidden");
         document.getElementById("torneioForm").style.display = "none";
 
-
-        // addEventListener para o botão "Iniciar" que começa a gerar as partidas
+        // Event listener para o botão "Iniciar" que começa a gerar as partidas
         confirmarNomesBtn.addEventListener("click", function () {
             const camposNomeInputs = camposNomesDiv.querySelectorAll("input");
             const nomes = Array.from(camposNomeInputs).map(input => input.value);
+            confirmarNomesBtn.style.display = "none";
 
             localStorage.setItem("nomesJogadores", JSON.stringify(nomes));
 
@@ -49,7 +84,7 @@ document.getElementById("confirmarQuantidade").addEventListener("click", functio
 
             // Exibir as partidas numa tabela
             const partidasTable = document.getElementById("partidasTable");
-            partidasTable.innerHTML = ""; // limpar a tabela
+            partidasTable.innerHTML = ""; // Limpar a tabela
 
             partidas.forEach(partida => {
                 const row = partidasTable.insertRow();
@@ -98,42 +133,12 @@ document.getElementById("confirmarQuantidade").addEventListener("click", functio
     }
 });
 
-// Gera combinações possíveis de times
-function generateCombinations(teams) {
-    const combinations = [];
-    for (let i = 0; i < teams.length; i++) {
-        for (let j = i + 1; j < teams.length; j++) {
-            combinations.push([teams[i], teams[j]]);
-        }
-    }
-    return combinations;
-}
-
-// Gera partidas baseado nas combinações de times
-function generateMatches(teams) {
-    let nomes = teams;
-
-    // Verificar se os nomes já estão no localStorage
-    const storedNomes = JSON.parse(localStorage.getItem("nomesJogadores"));
-    if (storedNomes && Array.isArray(storedNomes) && storedNomes.length > 0) {
-        nomes = storedNomes;
-    }
-
-
-    const combinations = generateCombinations(nomes);
-    const matches = combinations.map(combination => {
-        return {
-            homeTeam: combination[0],
-            awayTeam: combination[1]
-        };
-    });
-    return matches;
-}
-
-// Adicionar um evento de clique ao botão "Calcular Pontuação"
+// Event listener para o botão "Calcular Pontuação"
 document.getElementById("calcularPontuacaoBtn").addEventListener("click", function () {
     const partidasTable = document.getElementById("partidasTable");
     const resultadoDiv = document.getElementById("resultadoDiv");
+    calcularPontuacaoBtn.style.display = "none";
+    partidasTable.style.display = "none";
 
     // Inicializar um objeto para rastrear a pontuação de cada time
     const pontuacao = {};
@@ -199,54 +204,87 @@ document.getElementById("calcularPontuacaoBtn").addEventListener("click", functi
     // Exibir o time vencedor
     const vencedorTexto = document.createElement("p");
     vencedorTexto.textContent = `Time Vencedor: ${vencedor}`;
-    vencedorTexto.classList.add("vencedor-text");
+    vencedorTexto.classList.add("vencedor-text", "centralizado");
     resultadoDiv.appendChild(vencedorTexto);
 });
 
-// Event listener para o botão "Carregar"
-document.getElementById("carregar").addEventListener("click", function () {
+// Função para salvar o progresso no Local Storage
+function salvarProgresso() {
+    const quantidadeTimes = document.getElementById("quantidade").value;
+    const nomesTimes = [];
 
     const camposNomeInputs = document.querySelectorAll("input[type='text']");
-    const storedNomes = JSON.parse(localStorage.getItem("nomesJogadores"));
+    camposNomeInputs.forEach(input => {
+        nomesTimes.push(input.value);
+    });
 
-    if (storedNomes && Array.isArray(storedNomes) && storedNomes.length > 0) {
-        storedNomes.forEach((nomes, index) => {
+    // Salvar resultados das partidas (seleção dos resultados)
+    const resultadosPartidas = {};
+    const partidasTable = document.getElementById("partidasTable");
+
+    for (let i = 0; i < partidasTable.rows.length; i++) {
+        const row = partidasTable.rows[i];
+        const resultadoSelect = row.cells[1].getElementsByTagName("select")[0].value;
+        const times = row.cells[0].innerText.split(" x ");
+
+        resultadosPartidas[`${times[0]} x ${times[1]}`] = resultadoSelect;
+    }
+
+    // Salvar no Local Storage
+    localStorage.setItem("quantidadeTimes", quantidadeTimes);
+    localStorage.setItem("nomesTimes", JSON.stringify(nomesTimes));
+    localStorage.setItem("resultadosPartidas", JSON.stringify(resultadosPartidas));
+}
+
+// Função para restaurar o progresso
+function restaurarProgresso() {
+    const quantidadeTimesSalva = localStorage.getItem("quantidadeTimes");
+    const nomesTimesSalvos = localStorage.getItem("nomesTimes");
+    const resultadosPartidasSalvos = localStorage.getItem("resultadosPartidas");
+    const carregarButton = document.getElementById("carregar");
+
+    if (quantidadeTimesSalva || nomesTimesSalvos || resultadosPartidasSalvos) {
+        carregarButton.classList.remove("hidden");
+    }
+
+    if (quantidadeTimesSalva) {
+        // Restaurar a quantidade de times selecionada
+        document.getElementById("quantidade").value = quantidadeTimesSalva;
+    }
+
+    if (nomesTimesSalvos) {
+        // Restaurar os nomes dos times
+        const nomesTimes = JSON.parse(nomesTimesSalvos);
+        const camposNomeInputs = document.querySelectorAll("input[type='text']");
+
+        nomesTimes.forEach((nome, index) => {
             if (index < camposNomeInputs.length) {
                 camposNomeInputs[index].value = nome;
             }
         });
     }
 
+    if (resultadosPartidasSalvos) {
+        // Restaurar os resultados das partidas
+        const resultadosPartidas = JSON.parse(resultadosPartidasSalvos);
+        const partidasTable = document.getElementById("partidasTable");
 
-    // Recupere os dados do Local Storage
-    const nomesJogadores = JSON.parse(localStorage.getItem("nomesJogadores"));
+        for (let i = 0; i < partidasTable.rows.length; i++) {
+            const row = partidasTable.rows[i];
+            const times = row.cells[0].innerText.split(" x ");
+            const resultadoSelect = row.cells[1].getElementsByTagName("select")[0];
 
-    if (nomesJogadores) {
-        const dadosJogadoresTable = document.getElementById("dadosJogadoresTable");
-        dadosJogadoresTable.innerHTML = ""; // Limpe o conteúdo da tabela
-
-        // Crie uma linha de cabeçalho para a tabela
-        const cabecalhoRow = dadosJogadoresTable.insertRow();
-        cabecalhoRow.innerHTML = "<th>Time</th><th>Nome do Jogador/Time</th>";
-
-        // Preencha a tabela com os dados recuperados
-        nomesJogadores.forEach((nome, index) => {
-            const row = dadosJogadoresTable.insertRow();
-            row.innerHTML = `<td>Time ${index + 1}</td><td><input type="text" value="${nome}" readonly></td>`;
-        });
-
-        // Preencha os campos de input com os nomes armazenados no localStorage
-        camposNomeInputs.forEach((input, index) => {
-            if (index < storedNomes.length) {
-                input.value = storedNomes[index];
+            if (resultadosPartidas[`${times[0]} x ${times[1]}`]) {
+                resultadoSelect.value = resultadosPartidas[`${times[0]} x ${times[1]}`];
             }
-        });
-
-        // Exiba a tabela
-        document.getElementById("nomesJogadores").classList.remove("hidden");
-    } else {
-        // Se os dados não foram encontrados no Local Storage, exiba uma mensagem de erro ou trate de outra forma apropriada
-        alert("Os dados não foram encontrados no Local Storage.");
+        }
     }
+}
+
+// Event listener para o botão "Carregar"
+document.getElementById("carregar").addEventListener("click", function () {
+    restaurarProgresso();
 });
 
+// Chamar a função de restaurar o progresso ao carregar a página
+window.addEventListener("load", restaurarProgresso);
