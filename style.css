@@ -1,4 +1,4 @@
-/* reset de estilos para remover margens e preenchimentos padrão */
+/* Reset de estilos para remover margens e preenchimentos padrão */
 @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;500&family=Open+Sans&display=swap');
 
 html,
@@ -9,7 +9,7 @@ body {
 
 body {
     font-family: 'Kanit', sans-serif;
-    background-image: url(img/fundo.png);
+    background-image: url(img/background.png);
     background-size: 100%;
     color: #ffffff;
     display: flex;
@@ -27,21 +27,26 @@ header {
     margin: 0;
     padding: 0;
     justify-content: center;
-  }
+}
+
 /* Estilo para o logotipo */
 #libertadores-logo {
-    height: 250px; /* Altura da imagem */
-    width: 250px; /* Largura da imagem */
-    margin: 20px auto 0; /* Margem superior para afastar do topo e margens automáticas lateralmente */
-    display: block; /* Centralizar a imagem horizontalmente */
+    height: 250px;
+    /* Altura da imagem */
+    width: 250px;
+    /* Largura da imagem */
+    margin: 20px auto 0;
+    /* Margem superior para afastar do topo e margens automáticas lateralmente */
+    display: block;
+    /* Centralizar a imagem horizontalmente */
 }
 
 
 
-/* estilos para o cabeçalho */
+/* Estilos para o cabeçalho */
 
 
-/* estilos para os botões */
+/* Estilos para os botões */
 button {
     background-color: #ffffff;
     color: #000000;
@@ -58,7 +63,7 @@ button:hover {
     background-color: #868686;
 }
 
-/* estilos para os campos de entrada de texto */
+/* Estilos para os campos de entrada de texto */
 input[type="number"],
 input[type="text"] {
     border: 1px solid #030303;
@@ -70,18 +75,18 @@ input[type="text"] {
     height: 15px;
 }
 
-/* estilos para os cabeçalhos de seção */
+/* Estilos para os cabeçalhos de seção */
 h2 {
     font-size: 24px;
     margin: 20px 0;
 }
 
-/* estilos para os elementos escondidos */
+/* Estilos para os elementos escondidos */
 .hidden {
     display: none;
 }
 
-/* estilos para tabelas */
+/* Estilos para tabelas */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -103,21 +108,19 @@ td {
 }
 
 
-/* estilos para o time vencedor */
+/* Estilos para o time vencedor */
 .vencedor {
     background-color: #28a745;
-    /* cor de fundo para o time vencedor */
+    /* Cor de fundo para o time vencedor */
     color: #fff;
 }
 
-/* estilos para o resultado do time vencedor */
+/* Estilos para o resultado do time vencedor */
 .vencedor-text {
     color: #28a745;
-    /* cor de texto para o resultado do time vencedor */
-}
-
-.container {
+    /* Cor de texto para o resultado do time vencedor */
     text-align: center;
+    margin: 0 auto;
 }
 
 #torneioForm {
@@ -129,10 +132,6 @@ td {
 main {
     display: flex;
     align-items: center;
-}
-
-#organiza {
-    display: inline-block;
 }
 
 #container {
@@ -170,8 +169,9 @@ main {
     cursor: pointer;
     transition: background-color 0.3s ease;
     font-size: large;
-    margin: 20px auto; /* Centralizar o botão horizontalmente e adicionar margem superior e inferior */
-    }
+    margin: 20px auto;
+    /* Centralizar o botão horizontalmente e adicionar margem superior e inferior */
+}
 
 #calcularPontuacaoBtn:hover {
     background-color: #868686;
@@ -196,7 +196,7 @@ td {
     text-align: center;
 }
 
-#calc {
+#calcular-container {
     display: flex;
     align-items: center;
     margin-bottom: 50px;
@@ -207,17 +207,61 @@ td {
         font-size: 14px;
     }
 }
+
 #logo-container {
-    position: fixed; 
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    text-align: center; 
-    z-index: 999; 
-}
-footer{
-    position: fixed;
-    display: flex;
     text-align: center;
-    
+    z-index: 999;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    color: #ffffff;
+    /* Cor do texto do footer */
+    padding: 10px 0;
+}
+
+#button-container {
+    display: flex;
+}
+
+#carregar {
+    margin-left: 10px;
+    /* Adicione margem à direita para separar os botões */
+}
+
+input[type="number"],
+input[type="text"] {
+    border: 1px solid #030303;
+    padding: 8px;
+    border-radius: 5px;
+    font-size: large;
+    margin-bottom: 15px;
+    width: 500px;
+    height: 15px;
+    text-align: center;
+    /* Centraliza o texto dentro do campo de entrada */
+}
+
+/* Centraliza o texto do placeholder */
+input[type="text"]::placeholder {
+    text-align: center;
+}
+
+#partidas {
+    width: 100%;
+}
+
+#tabelas-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
