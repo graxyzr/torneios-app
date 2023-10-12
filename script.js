@@ -210,15 +210,7 @@ document.getElementById("calcularPontuacaoBtn").addEventListener("click", functi
 
 // Função para salvar o progresso no Local Storage
 function salvarProgresso() {
-    const quantidadeTimes = document.getElementById("quantidade").value;
-    const nomesTimes = [];
 
-    const camposNomeInputs = document.querySelectorAll("input[type='text']");
-    camposNomeInputs.forEach(input => {
-        nomesTimes.push(input.value);
-    });
-
-    // Salvar resultados das partidas (seleção dos resultados)
     const resultadosPartidas = {};
     const partidasTable = document.getElementById("partidasTable");
 
@@ -230,61 +222,68 @@ function salvarProgresso() {
         resultadosPartidas[`${times[0]} x ${times[1]}`] = resultadoSelect;
     }
 
-    // Salvar no Local Storage
-    localStorage.setItem("quantidadeTimes", quantidadeTimes);
-    localStorage.setItem("nomesTimes", JSON.stringify(nomesTimes));
     localStorage.setItem("resultadosPartidas", JSON.stringify(resultadosPartidas));
 }
 
-// Função para restaurar o progresso
 function restaurarProgresso() {
-    const quantidadeTimesSalva = localStorage.getItem("quantidadeTimes");
-    const nomesTimesSalvos = localStorage.getItem("nomesTimes");
+
     const resultadosPartidasSalvos = localStorage.getItem("resultadosPartidas");
-    const carregarButton = document.getElementById("carregar");
-
-    if (quantidadeTimesSalva || nomesTimesSalvos || resultadosPartidasSalvos) {
-        carregarButton.classList.remove("hidden");
-    }
-
-    if (quantidadeTimesSalva) {
-        // Restaurar a quantidade de times selecionada
-        document.getElementById("quantidade").value = quantidadeTimesSalva;
-    }
-
-    if (nomesTimesSalvos) {
-        // Restaurar os nomes dos times
-        const nomesTimes = JSON.parse(nomesTimesSalvos);
-        const camposNomeInputs = document.querySelectorAll("input[type='text']");
-
-        nomesTimes.forEach((nome, index) => {
-            if (index < camposNomeInputs.length) {
-                camposNomeInputs[index].value = nome;
-            }
-        });
-    }
 
     if (resultadosPartidasSalvos) {
-        // Restaurar os resultados das partidas
+
         const resultadosPartidas = JSON.parse(resultadosPartidasSalvos);
         const partidasTable = document.getElementById("partidasTable");
 
         for (let i = 0; i < partidasTable.rows.length; i++) {
+
             const row = partidasTable.rows[i];
             const times = row.cells[0].innerText.split(" x ");
             const resultadoSelect = row.cells[1].getElementsByTagName("select")[0];
 
-            if (resultadosPartidas[`${times[0]} x ${times[1]}`]) {
-                resultadoSelect.value = resultadosPartidas[`${times[0]} x ${times[1]}`];
+            // Verifique se há um resultado salvo para a partida e defina-o no dropdown
+            const resultadoSalvo = resultadosPartidas[`${times[0]} x ${times[1]}`];
+            if (resultadoSalvo) {
+                resultadoSelect.value = resultadoSalvo;
             }
         }
     }
 }
 
-// Event listener para o botão "Carregar"
-document.getElementById("carregar").addEventListener("click", function () {
-    restaurarProgresso();
-});
+document.getElementById("carregar").addEventListener("click", () => {
+    // Recupere as partidas salvas do Local Storage
+    const savedMatches = JSON.parse(localStorage.getItem("dadosJogos"));
 
-// Chamar a função de restaurar o progresso ao carregar a página
-window.addEventListener("load", restaurarProgresso);
+    // Verifique se há partidas salvas
+    if (savedMatches && Array.isArray(savedMatches) && savedMatches.length > 0) {
+        // Exiba as partidas na tela
+        const partidasTable = document.getElementById("partidasTable");
+        partidasTable.innerHTML = ""; ''
+
+        savedMatches.forEach(partida => {
+            const row = partidasTable.insertRow();
+            const cell1 = row.insertCell(0);
+            const cell2 = row.insertCell(1);
+
+            cell1.innerHTML = `${partida.homeTeam} x ${partida.awayTeam}`;
+
+            const resultadoSelect = document.createElement("select");
+            resultadoSelect.id = `resultado-${partida.homeTeam}-${partida.awayTeam}`;
+            const empateOption = document.createElement("option");
+            empateOption.value = "Empate";
+            empateOption.textContent = "Empate";
+            resultadoSelect.appendChild(empateOption);
+
+            const vitoriaTime1Option = document.createElement("option");
+            vitoriaTime1Option.value = `Vitória de ${partida.homeTeam}`;
+            vitoriaTime1Option.textContent = `Vitória de ${partida.homeTeam}`;
+            resultadoSelect.appendChild(vitoriaTime1Option);
+
+            const vitoriaTime2Option = document.createElement("option");
+            vitoriaTime2Option.value = `Vitória de ${partida.awayTeam}`;
+            vitoriaTime2Option.textContent = `Vitória de ${partida.awayTeam}`;
+            resultadoSelect.appendChild(vitoriaTime2Option);
+
+            cell2.appendChild(resultadoSelect);
+        });
+    }
+});
