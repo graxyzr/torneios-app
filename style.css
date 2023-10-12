@@ -1,5 +1,10 @@
 /* Reset de estilos para remover margens e preenchimentos padrão */
 @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;500&family=Open+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Prompt&display=swap');
+
+* {
+    font-family: 'Prompt', sans-serif;
+}
 
 html,
 body {
@@ -40,11 +45,6 @@ header {
     display: block;
     /* Centralizar a imagem horizontalmente */
 }
-
-
-
-/* Estilos para o cabeçalho */
-
 
 /* Estilos para os botões */
 button {
@@ -111,14 +111,12 @@ td {
 /* Estilos para o time vencedor */
 .vencedor {
     background-color: #28a745;
-    /* Cor de fundo para o time vencedor */
     color: #fff;
 }
 
 /* Estilos para o resultado do time vencedor */
 .vencedor-text {
     color: #28a745;
-    /* Cor de texto para o resultado do time vencedor */
     text-align: center;
     margin: 0 auto;
 }
@@ -134,7 +132,7 @@ main {
     align-items: center;
 }
 
-#container {
+.container {
     margin: 0 auto;
     padding: 20px;
     background-color: rgba(255, 255, 255, 0.7);
@@ -224,8 +222,15 @@ footer {
     right: 0;
     text-align: center;
     color: #ffffff;
-    /* Cor do texto do footer */
-    padding: 10px 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+a {
+    color: #fff;
+    text-decoration: none;
 }
 
 #button-container {
@@ -271,6 +276,7 @@ input[type="text"]::placeholder {
         font-size: 14px;
     }
 }
+
 @media (max-width: 768px) {
     #libertadores-logo {
         height: 150px;
@@ -278,30 +284,33 @@ input[type="text"]::placeholder {
     }
 
 }
+
 /* Styles for screens smaller than 768px (e.g., smartphones) */
 @media (max-width: 768px) {
     #torneioForm {
-        text-align: center; /* Center align the form elements */
+        text-align: center;
+        /* Center align the form elements */
     }
 
     input[type="number"] {
-        width: 100%; /* Make the number input full width */
+        width: 100%;
+        /* Make the number input full width */
         max-width: 100%;
     }
 
     input[type="text"] {
-        width: 100%; /* Make the text input full width */
+        width: 100%;
+        /* Make the text input full width */
         max-width: 100%;
     }
 
     #button-container {
-        flex-direction: column; /* Stack buttons vertically */
+        flex-direction: column;
+        /* Stack buttons vertically */
     }
 
     button {
-        margin: 10px 0; /* Add space between buttons */
+        margin: 10px 0;
+        /* Add space between buttons */
     }
 }
-
-
-
