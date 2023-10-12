@@ -9,7 +9,7 @@ body {
 
 body {
     font-family: 'Kanit', sans-serif;
-    background-image: url(img/background.png);
+    background-image: url(img/fundo.png);
     background-size: 100%;
     color: #ffffff;
     display: flex;
@@ -31,9 +31,9 @@ header {
 
 /* Estilo para o logotipo */
 #libertadores-logo {
-    height: 250px;
+    height: 13%;
     /* Altura da imagem */
-    width: 250px;
+    width: 13%;
     /* Largura da imagem */
     margin: 20px auto 0;
     /* Margem superior para afastar do topo e margens automáticas lateralmente */
@@ -137,7 +137,7 @@ main {
 #container {
     margin: 0 auto;
     padding: 20px;
-    background-color: rgba(218, 165, 32, 0.7);
+    background-color: rgba(255, 255, 255, 0.7);
     /* Cor de fundo com 70% de opacidade */
     border: 2px solid rgba(0, 0, 0, 0.1);
     /* Borda com transparência */
@@ -265,3 +265,43 @@ input[type="text"]::placeholder {
     align-items: center;
     text-align: center;
 }
+
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+}
+@media (max-width: 768px) {
+    #libertadores-logo {
+        height: 150px;
+        width: 150px;
+    }
+
+}
+/* Styles for screens smaller than 768px (e.g., smartphones) */
+@media (max-width: 768px) {
+    #torneioForm {
+        text-align: center; /* Center align the form elements */
+    }
+
+    input[type="number"] {
+        width: 100%; /* Make the number input full width */
+        max-width: 100%;
+    }
+
+    input[type="text"] {
+        width: 100%; /* Make the text input full width */
+        max-width: 100%;
+    }
+
+    #button-container {
+        flex-direction: column; /* Stack buttons vertically */
+    }
+
+    button {
+        margin: 10px 0; /* Add space between buttons */
+    }
+}
+
+
+
