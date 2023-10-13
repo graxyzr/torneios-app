@@ -12,14 +12,15 @@
 
 <body>
     <audio autoplay loop>
-        <source
-            src="/audio/SnapInsta.io - Hino da Conmebol Libertadores (atualizado) - Himno de la Conmebol Libertadores (128 kbps).mp3"
-            type="audio/mp3">
+        <source src="audio/hino-libertadores.mp3" type="audio/mp3">
     </audio>
 
     <div id="logo-container">
-        <img id="libertadores-logo" src="img/Design sem nome (8).png" alt="Logo">
+        <a href="index.html">
+            <img id="libertadores-logo" src="img/libertadores-logo.png" alt="Logo">
+        </a>
     </div>
+
     <div id="loadedData">
     </div>
 
@@ -33,7 +34,9 @@
                     <button type="button" id="carregar">Carregar</button>
                 </div>
             </form>
+
             <div id="resultadoDiv"></div>
+
             <div id="nomesJogadores" class="hidden">
                 <h3>Insira os nomes dos jogadores/times:</h3>
             </div>
@@ -42,14 +45,12 @@
                 <div id="partidas" class="hidden">
                     <table id="partidasTable"></table>
                 </div>
-
                 <div id="calcular-container">
                     <button id="calcularPontuacaoBtn" class="hidden">Calcular Pontuação</button>
                 </div>
             </div>
 
             <div id="resultadoDiv"></div>
-
         </main>
     </div>
 
