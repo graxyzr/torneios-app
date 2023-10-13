@@ -137,6 +137,16 @@ document.getElementById("confirmarQuantidade").addEventListener("click", functio
             salvarProgressoBtn.id = "salvarProgresso";
             salvarProgressoBtn.textContent = "Salvar";
             partidasDiv.appendChild(salvarProgressoBtn);
+
+            // Configurar o evento de clique do botão "Salvar"
+            salvarProgressoBtn.addEventListener("click", salvarProgresso);
+
+            // Configurar o evento de clique no botão "Carregar"
+            const carregarBtn = document.getElementById("carregar");
+            carregarBtn.addEventListener("click", function () {
+                restaurarProgresso();
+            });
+
         });
     }
 });
