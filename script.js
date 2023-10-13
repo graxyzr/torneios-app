@@ -1,4 +1,5 @@
 let confirmarNomesBtn;
+let salvarProgressoBtn; // Adicione esta linha
 
 // Função para gerar combinações possíveis de times
 function generateCombinations(teams) {
@@ -129,6 +130,13 @@ document.getElementById("confirmarQuantidade").addEventListener("click", functio
             // Mostrar o botão "Calcular Pontuação"
             const calcularPontuacaoBtn = document.getElementById("calcularPontuacaoBtn");
             calcularPontuacaoBtn.classList.remove("hidden");
+
+            // Mostrar o botão "Salvar"
+            salvarProgressoBtn = document.createElement("button");
+            salvarProgressoBtn.type = "button";
+            salvarProgressoBtn.id = "salvarProgresso";
+            salvarProgressoBtn.textContent = "Salvar";
+            partidasDiv.appendChild(salvarProgressoBtn);
         });
     }
 });
@@ -137,6 +145,8 @@ document.getElementById("confirmarQuantidade").addEventListener("click", functio
 document.getElementById("calcularPontuacaoBtn").addEventListener("click", function () {
     const partidasTable = document.getElementById("partidasTable");
     const resultadoDiv = document.getElementById("resultadoDiv");
+    const calcularPontuacaoBtn = document.getElementById("calcularPontuacaoBtn");
+    document.getElementById("salvarProgresso").style.display = "none";
     calcularPontuacaoBtn.style.display = "none";
     partidasTable.style.display = "none";
 
@@ -210,7 +220,6 @@ document.getElementById("calcularPontuacaoBtn").addEventListener("click", functi
 
 // Função para salvar o progresso no Local Storage
 function salvarProgresso() {
-
     const resultadosPartidas = {};
     const partidasTable = document.getElementById("partidasTable");
 
@@ -226,16 +235,13 @@ function salvarProgresso() {
 }
 
 function restaurarProgresso() {
-
     const resultadosPartidasSalvos = localStorage.getItem("resultadosPartidas");
 
     if (resultadosPartidasSalvos) {
-
         const resultadosPartidas = JSON.parse(resultadosPartidasSalvos);
         const partidasTable = document.getElementById("partidasTable");
 
         for (let i = 0; i < partidasTable.rows.length; i++) {
-
             const row = partidasTable.rows[i];
             const times = row.cells[0].innerText.split(" x ");
             const resultadoSelect = row.cells[1].getElementsByTagName("select")[0];
@@ -257,7 +263,7 @@ document.getElementById("carregar").addEventListener("click", () => {
     if (savedMatches && Array.isArray(savedMatches) && savedMatches.length > 0) {
         // Exiba as partidas na tela
         const partidasTable = document.getElementById("partidasTable");
-        partidasTable.innerHTML = ""; ''
+        partidasTable.innerHTML = "";
 
         savedMatches.forEach(partida => {
             const row = partidasTable.insertRow();
@@ -287,3 +293,5 @@ document.getElementById("carregar").addEventListener("click", () => {
         });
     }
 });
+
+document.getElementById("salvarProgresso").addEventListener("click", salvarProgresso);
