@@ -201,44 +201,6 @@ main {
     align-items: center;
 }
 
-/* Estilos para responsividade */
-@media (max-width: 768px) {
-
-    body {
-        font-size: 14px;
-    }
-
-    #libertadores-logo {
-        height: 150px;
-        width: 150px;
-    }
-
-    #torneioForm {
-        text-align: center;
-    }
-
-    input[type="number"],
-    input[type="text"] {
-        width: 100%;
-        max-width: 100%;
-        font-size: 3vw;
-    }
-
-    #button-container {
-        flex-direction: column;
-        display: flex;
-        align-items: center;
-    }
-
-    button {
-        margin: 5px 0;
-    }
-
-    footer {
-        font-size: 3vw;
-    }
-
-}
 
 footer {
     position: absolute;
@@ -270,3 +232,50 @@ a {
 #partidas {
     width: 100%;
 }
+/* Estilos para dispositivos móveis (máximo de 600px de largura) */
+@media (max-width: 600px) {
+    /* Redefina estilos que você deseja ajustar */
+    body {
+        background-size: cover;
+    }
+    
+    /* Ajuste o tamanho dos campos de entrada e container */
+    input[type="number"],
+    input[type="text"] {
+        width: 100%;
+    }
+    
+    .container {
+        margin-top: 5%;
+    }
+    
+    /* Ajuste o tamanho da tabela de partidas */
+    #tabelas-container {
+        max-width: 100%;
+    }
+    
+    /* Ajuste o estilo dos botões */
+    button {
+        width: 100%;
+        margin: 10px 0;
+    }
+    
+    /* Ajuste o estilo do cabeçalho */
+    header {
+        flex-direction: column;
+    }
+    
+    /* Ajuste o estilo do logotipo */
+    #libertadores-logo {
+        height: 10%;
+        width: 10%;
+    }
+    
+    /* Ajuste o estilo do footer */
+    footer {
+        flex-direction: column;
+    }
+}
+
+/* Estilos padrão para telas maiores (acima de 600px de largura) */
+/* Insira aqui os estilos que deseja manter inalterados para telas maiores */
