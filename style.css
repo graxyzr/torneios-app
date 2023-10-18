@@ -201,7 +201,6 @@ main {
     align-items: center;
 }
 
-
 footer {
     position: absolute;
     bottom: 0;
@@ -213,6 +212,7 @@ footer {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 20px;
 }
 
 a {
@@ -232,50 +232,73 @@ a {
 #partidas {
     width: 100%;
 }
+
 /* Estilos para dispositivos móveis (máximo de 600px de largura) */
 @media (max-width: 600px) {
+
     /* Redefina estilos que você deseja ajustar */
     body {
         background-size: cover;
     }
-    
+
     /* Ajuste o tamanho dos campos de entrada e container */
     input[type="number"],
     input[type="text"] {
         width: 100%;
     }
-    
+
     .container {
         margin-top: 5%;
+        padding: 10px;
     }
-    
+
     /* Ajuste o tamanho da tabela de partidas */
     #tabelas-container {
         max-width: 100%;
     }
-    
+
     /* Ajuste o estilo dos botões */
     button {
         width: 100%;
         margin: 10px 0;
     }
-    
+
     /* Ajuste o estilo do cabeçalho */
     header {
         flex-direction: column;
     }
-    
+
     /* Ajuste o estilo do logotipo */
     #libertadores-logo {
-        height: 10%;
-        width: 10%;
+        height: 40%;
+        width: 40%;
     }
-    
+
     /* Ajuste o estilo do footer */
     footer {
         flex-direction: column;
     }
 }
 
-/* Estilos padrão para telas maiores (acima de 600px de largura) */
-/* Insira aqui os estilos que deseja manter inalterados para telas maiores */
+#retornarAoMenu {
+    background-color: #ffffff;
+    color: #000000;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: larger;
+    margin: 20px auto;
+    display: block;
+    text-align: center;
+}
+
+/* Estilo para animação do botão "Retornar ao Menu" */
+#retornarAoMenu:hover {
+    background-color: #868686;
+}
+
+.textMenu {
+    text-align: center;
+}
