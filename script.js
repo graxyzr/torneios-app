@@ -1,3 +1,4 @@
+// Declaração de variáveis
 let confirmarNomesBtn;
 let salvarProgressoBtn; // Adicione esta linha
 
@@ -226,6 +227,12 @@ document.getElementById("calcularPontuacaoBtn").addEventListener("click", functi
     vencedorTexto.textContent = `Time Vencedor: ${vencedor}`;
     vencedorTexto.classList.add("vencedor-text", "centralizado");
     resultadoDiv.appendChild(vencedorTexto);
+    const textMenu = document.createElement("p");
+    textMenu.style.backgroundColor = "black";
+    textMenu.style.borderRadius = "10px";
+    textMenu.textContent = `Clique na Logotipo para retornar ao menu!`;
+    textMenu.classList.add("textMenu");
+    resultadoDiv.appendChild(textMenu);
 });
 
 // Função para salvar o progresso no Local Storage
@@ -265,11 +272,12 @@ function restaurarProgresso() {
     }
 }
 
-document.getElementById("carregar").addEventListener("click", () => {
+// Event listener para o botão "Carregar"
+document.getElementById("carregar").addEventListener("click", function () {
     // Recupere as partidas salvas do Local Storage
     const savedMatches = JSON.parse(localStorage.getItem("dadosJogos"));
+    const resultadosPartidasSalvos = JSON.parse(localStorage.getItem("resultadosPartidas"));
 
-    // Verifique se há partidas salvas
     if (savedMatches && Array.isArray(savedMatches) && savedMatches.length > 0) {
         // Exiba as partidas na tela
         const partidasTable = document.getElementById("partidasTable");
@@ -300,8 +308,51 @@ document.getElementById("carregar").addEventListener("click", () => {
             resultadoSelect.appendChild(vitoriaTime2Option);
 
             cell2.appendChild(resultadoSelect);
+
+            // Preencha o select com o valor do localStorage, se estiver disponível
+            const resultadoSalvo = resultadosPartidasSalvos[`${partida.homeTeam} x ${partida.awayTeam}`];
+            if (resultadoSalvo) {
+                resultadoSelect.value = resultadoSalvo;
+            }
         });
+
+        // Ocultar os campos de entrada e botões de Confirmar e Carregar
+        document.getElementById("quantidade").style.display = "none";
+        document.getElementById("confirmarQuantidade").style.display = "none";
+        document.getElementById("carregar").style.display = "none";
+
+        // Mostre as partidas e os botões "Salvar" e "Calcular Pontuação"
+        const partidasDiv = document.getElementById("partidas");
+        partidasDiv.classList.remove("hidden");
+
+        const calcularPontuacaoBtn = document.getElementById("calcularPontuacaoBtn");
+        calcularPontuacaoBtn.classList.remove("hidden");
+
+        const salvarProgressoBtn = document.getElementById("salvarProgresso");
+        salvarProgressoBtn.style.display = "block";  // Mostrar o botão "Salvar"
+
+    } else {
+        // Se não houver dados salvos, exiba uma mensagem
+        const partidasTable = document.getElementById("partidasTable");
+        partidasTable.innerHTML = "";
+
+        const mensagemSemDados = document.createElement("p");
+        mensagemSemDados.textContent = "Não há nada salvo.";
+        partidasTable.appendChild(mensagemSemDados);
+
+        // Ocultar os campos de entrada e botões de Confirmar e Carregar
+        document.getElementById("quantidade").style.display = "none";
+        document.getElementById("confirmarQuantidade").style.display = "none";
+        document.getElementById("carregar").style.display = "none";
+
+        // Mostrar o botão "Salvar" antes do botão "Calcular Pontuação"
+        const salvarProgressoBtn = document.getElementById("salvarProgresso");
+        salvarProgressoBtn.style.display = "block";  // Mostrar o botão "Salvar"
+
+        const calcularPontuacaoBtn = document.getElementById("calcularPontuacaoBtn");
+        calcularPontuacaoBtn.classList.remove("hidden");  // Mostrar o botão "Calcular Pontuação"
     }
 });
 
+// Event listener para o botão "Salvar"
 document.getElementById("salvarProgresso").addEventListener("click", salvarProgresso);
